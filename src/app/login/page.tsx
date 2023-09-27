@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 'use client'
 
 import { Button, Col, Row } from 'antd';
@@ -6,17 +7,22 @@ import Image from 'next/image';
 import Form from '../components/Forms/Form';
 import FormInput from '../components/Forms/FormInput';;
 import {  SubmitHandler } from "react-hook-form";
+import { useLoginUserMutation } from '@/redux/api/authApi';
 interface FormValue {
    id:string;
    password:string
 }
+const [loginUser] = useLoginUserMutation()
 
 const LoginPage = () => {
-  const onSubmit:SubmitHandler<FormValue>= (data)=>{
+
+
+  const onSubmit:SubmitHandler<FormValue>=async (data:any)=>{
     try {
-      console.log(data)
-    } catch (error) {
-      console.log(error)
+      const res = await loginUser({...data}).unwrap()
+      console.log(res)
+    } catch (error:any) {
+      console.log(error.message)
     }
   }
   return (
