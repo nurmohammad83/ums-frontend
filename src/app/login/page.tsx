@@ -6,7 +6,7 @@ import Image from 'next/image';
 import Form from '../components/Forms/Form';
 import FormInput from '../components/Forms/FormInput';;
 import {  SubmitHandler } from "react-hook-form";
-import { storeUserInfo } from '@/services/auth.service';
+import { getUserInfo, storeUserInfo } from '@/services/auth.service';
 import { useUserLoginMutation } from '@/redux/api/authApi';
 interface FormValue {
    id:string;
@@ -15,8 +15,8 @@ interface FormValue {
 
 
 const LoginPage = () => {
+  getUserInfo()
 const [userLogin] = useUserLoginMutation()
-
   const onSubmit:SubmitHandler<FormValue>=async (data:any)=>{
     try {
       const res = await userLogin({...data}).unwrap()
