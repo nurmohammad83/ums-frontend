@@ -18,7 +18,7 @@ const router = useRouter()
   setLoading(true)
  },[router,userLoggedIn])
 
-if(loading) {
+if(!loading) {
   return <p>Loading...</p>
 }
 
