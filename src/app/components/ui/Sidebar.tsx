@@ -6,12 +6,16 @@ import type { MenuProps } from 'antd';
 import { Layout, Menu, theme } from 'antd';
 import { USER_ROLE } from '@/constants/role';
 import defaultSidebarItem from '@/constants/defaultSidebarItem';
+import { getUserInfo } from '@/services/auth.service';
 
 const { Sider } = Layout;
 
 const Sidebar = () => {
     const [collapsed, setCollapsed] = useState(false);
-    const role = USER_ROLE.ADMIN
+
+    const {role} = getUserInfo() as any
+
+
     const {
       token: { colorBgContainer },
     } = theme.useToken();
@@ -36,9 +40,10 @@ const Sidebar = () => {
         fontSize:'2rem',
         textAlign:'center',
         fontWeight:'bold',
-        marginBottom:'1rem'
+        marginBottom:'.5rem',
+        padding:'10px 0'
     }}>
-        PH University
+        University <br /> Management
     </div>
     <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={defaultSidebarItem(role)} />
   </Sider>

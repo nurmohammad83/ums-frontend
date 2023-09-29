@@ -1,7 +1,9 @@
+import Image from "next/image";
+import errorImg from '../assets/error.img.png'
 const NotFoundPage = () => {
   return (
     <div>
-      <h1>404!!! Page not found!</h1>
+     <Image src={errorImg} fill alt="error Img" />
     </div>
   );
 };

@@ -1,7 +1,14 @@
 'use client'
+
+import { Row, Space, Spin } from 'antd';
 const LoadingPage = () => {
   return (
-      <h1>Loading....</h1>
+    <Row style={{height:'100vh'}} justify='center' align='middle'>
+
+  <Space  size="large">
+    <Spin size="large" />
+  </Space>
+    </Row>
   );
 };
 

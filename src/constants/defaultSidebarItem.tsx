@@ -18,7 +18,7 @@ const defaultSidebarItem = (role: string) => {
       icon: <ProfileOutlined />,
       children: [
         {
-          label: <Link href={`/${role}/profile`}>Account Profile</Link>,
+          label: <Link href={`/${role}`}>Account Profile</Link>,
           key: `/${role}/acout-profile`,
         },
         {
@@ -126,19 +126,8 @@ const defaultSidebarItem = (role: string) => {
     },
     {
       label: <Link href={`/${role}/user`}>Manage User</Link>,
-      key: `/${role}/admin`,
+      key: `/${role}/user`,
       icon: <TableOutlined />,
-    },
-    {
-      label: "Manage Permission",
-      key: `manage-permission`,
-      icon: <AppstoreOutlined />,
-      children: [
-        {
-          label: <Link href={`/${role}/permission`}>View Permissions</Link>,
-          key: `/${role}/permission`,
-        },
-      ],
     },
     {
       label: "Management",

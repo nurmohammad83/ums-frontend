@@ -3,7 +3,7 @@ import {useState,useEffect} from 'react'
 import { Layout } from "antd";
 import Sidebar from "../components/ui/Sidebar";
 import Contents from "../components/ui/Contents";
-import { isLoggedIn } from "@/services/auth.service";
+import {  isLoggedIn } from "@/services/auth.service";
 import { useRouter } from "next/navigation";
 
 const DashboardLayout= ({children}:{children:React.ReactNode}) => {
@@ -25,7 +25,7 @@ if(!loading) {
     return (
       <Layout hasSider>
         <Sidebar />
-       <Contents> {children}</Contents>
+          <Contents> {children}</Contents>
         </Layout>
     );
   };
