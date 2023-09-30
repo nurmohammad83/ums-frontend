@@ -7,13 +7,11 @@ import { getUserInfo, removeUserInfo } from "@/services/auth.service";
 import { authKey } from "@/constants/authKey";
 const Header = () => {
   const user:any = getUserInfo()
-  console.log(user)
     const router = useRouter();
     const logOut = ()=>{
         removeUserInfo(authKey)
         router.push("/login")
     }
-
 
   const items: MenuProps["items"] = [
     {
