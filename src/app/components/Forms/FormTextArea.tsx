@@ -5,23 +5,17 @@ import { useFormContext, Controller } from "react-hook-form";
 
 interface IInput {
   name: string;
-  type?: string;
-  size?: "large" | "small" | "middle";
+  rows?:number;
   value?: string;
-  id?: string;
   placeholder?: string;
-  validation?: string;
   label?: string;
 }
 
-const FormInput = ({
+const FormTextArea = ({
   name,
-  type,
-  size,
   value,
-  id,
+  rows,
   placeholder,
-  validation,
   label,
 }: IInput) => {
   const { control } = useFormContext();
@@ -32,24 +26,16 @@ const FormInput = ({
       control={control}
       name={name}
       render={({ field }) => (
-        type === 'password' ?
-        <Input.Password
-          type={type}
-          size={size}
-          placeholder={placeholder}
-          {...field}
-          value={value ? value : field.value}
-        /> : <Input
-        type={type}
-        size={size}
+        <Input.TextArea 
+        rows={rows}
         placeholder={placeholder}
         {...field}
-        value={value ? value : field.value}
-      />
+        defaultValue={value}
+        />
       )}
     />
     </>
   );
 };
 
-export default FormInput;
+export default FormTextArea;

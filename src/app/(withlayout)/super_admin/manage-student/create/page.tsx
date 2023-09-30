@@ -1,23 +1,50 @@
-'use client'
-
-import UMBradCrumb from "@/app/components/ui/UMBredCrumb"
+"use client";
+import StepperForm from "@/app/components/StepperForm/StepperForm";
+import GuardianInfo from "@/app/components/StudentForms/GuardianInfo";
+import LocalGuardianInfo from "@/app/components/StudentForms/LocalGuardianInfo";
+import StudentBasicInfo from "@/app/components/StudentForms/StudentBasicInfo";
+import StudentInfo from "@/app/components/StudentForms/StudentINfo";
+import UMBradCrumb from "@/app/components/ui/UMBredCrumb";
 import { getUserInfo } from "@/services/auth.service";
 
 const CreateStudentPage = () => {
-    const {role} = getUserInfo() as any;
+  const { role } = getUserInfo() as any;
+  const steps = [
+    {
+      title: 'Student Information',
+      content: <StudentInfo />,
+    },
+    {
+      title: 'Basic Information',
+      content: <StudentBasicInfo />,
+    },
+    {
+      title: 'Guardian Information',
+      content: <GuardianInfo />
+    },
+    {
+      title: 'Local Guardian Information',
+      content: <LocalGuardianInfo />
+    },
+  ];
   return (
-    <div> <UMBradCrumb items={
-        [
+    <div>
+      {" "}
+      <UMBradCrumb
+        items={[
           {
-            label:`${role}`,
-            link:`/${role}`
+            label: `${role}`,
+            link: `/${role}`,
           },
           {
-            label:`manage-student`,
-            link:`/${role}/manage-student`
+            label: `manage-student`,
+            link: `/${role}/manage-student`,
           },
-        ]
-      }/><h1>CreateStudentPage</h1></div>
-  )
-}
-export default CreateStudentPage
+        ]}
+      />
+      <h1>Create Student</h1>
+      <StepperForm steps={steps}/>
+    </div>
+  );
+};
+export default CreateStudentPage;
