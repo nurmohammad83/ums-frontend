@@ -137,7 +137,7 @@ const CreateAdminPage = () => {
                 type="email"
                 size="large"
                 name="admin.email"
-                label="Email"
+                label="Email Address"
               />
             </Col>
             <Col
