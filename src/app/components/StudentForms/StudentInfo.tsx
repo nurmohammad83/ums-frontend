@@ -4,7 +4,6 @@ import { Col, Row } from "antd"
 import FormSelectFiled from "../Forms/FormSelectField"
 import { departmentOptions, genderOptions } from "@/constants/golbal"
 import FormInput from "../Forms/FormInput"
-import UploadImage from "../ui/UploadImage"
 
 const StudentInfo = () => {
   return (
@@ -23,43 +22,43 @@ const StudentInfo = () => {
       <Col
         style={{ marginBottom: "10px" }}
         className="gutter-row"
-        span={8}
+        span={6}
       >
         <FormInput
           type="text"
           size="large"
-          name="admin.name.firstName"
+          name="student.name.firstName"
           label="First Name"
         />
       </Col>
       <Col
         style={{ marginBottom: "10px" }}
         className="gutter-row"
-        span={8}
+        span={6}
       >
         <FormInput
           type="text"
           size="large"
-          name="admin.name.middleName"
+          name="student.name.middleName"
           label="Middle Name"
         />
       </Col>
       <Col
         style={{ marginBottom: "10px" }}
         className="gutter-row"
-        span={8}
+        span={6}
       >
         <FormInput
           type="text"
           size="large"
-          name="admin.name.lastName"
+          name="student.name.lastName"
           label="Last Name"
         />
       </Col>
       <Col
         style={{ marginBottom: "10px" }}
         className="gutter-row"
-        span={8}
+        span={6}
       >
         <FormInput  size="large" type="password" name="password" label="Password" />
       </Col>
@@ -68,21 +67,21 @@ const StudentInfo = () => {
         className="gutter-row"
         span={8}
       >
-        <FormSelectFiled size="large"   name="admin.gender" options={genderOptions} placeholder="Select" label="Gender"/>
+        <FormSelectFiled size="large"   name="student.academicDepartment" options={genderOptions} placeholder="Select" label="Academic Department"/>
       </Col>
       <Col
         style={{ marginBottom: "10px" }}
         className="gutter-row"
         span={8}
       >
-        <FormSelectFiled size="large"   name="admin.managementDepartment" options={departmentOptions} placeholder="Select" label="Department"/>
+        <FormSelectFiled size="large"   name="student.academicFaculty" options={departmentOptions} placeholder="Select" label="Academic Faculty"/>
       </Col>
       <Col
         style={{ marginBottom: "10px" }}
         className="gutter-row"
         span={8}
       >
-       <UploadImage />
+        <FormSelectFiled size="large"   name="student.academicSemester" options={departmentOptions} placeholder="Select" label="Academic Semester"/>
       </Col>
     </Row>
   </div>

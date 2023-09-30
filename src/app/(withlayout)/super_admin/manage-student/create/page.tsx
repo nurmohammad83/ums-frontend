@@ -1,9 +1,10 @@
 "use client";
 import StepperForm from "@/app/components/StepperForm/StepperForm";
-import GuardianInfo from "@/app/components/StudentForms/GuardianInfo";
+import GuardianInfo from "@/app/components/StudentForms/GaurdianInfo";
+
 import LocalGuardianInfo from "@/app/components/StudentForms/LocalGuardianInfo";
 import StudentBasicInfo from "@/app/components/StudentForms/StudentBasicInfo";
-import StudentInfo from "@/app/components/StudentForms/StudentINfo";
+import StudentInfo from "@/app/components/StudentForms/StudentInfo";
 import UMBradCrumb from "@/app/components/ui/UMBredCrumb";
 import { getUserInfo } from "@/services/auth.service";
 

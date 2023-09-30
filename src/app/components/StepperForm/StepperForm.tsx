@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, message, Steps, theme } from 'antd';
+import { FormProvider, useForm } from 'react-hook-form';
 interface ISteps {
     steps:{
         title:string;
@@ -21,11 +22,13 @@ const StepperForm= ({steps}:ISteps) => {
 
   const items = steps.map((item) => ({ key: item.title, title: item.title }));
 
-
+const method = useForm()
 
   return (
     <>
       <Steps current={current} items={items} />
+     <FormProvider {...method}>
+      <form>
       <div>{steps[current].content}</div>
       <div style={{ marginTop: 24 }}>
         {current < steps.length - 1 && (
@@ -44,6 +47,8 @@ const StepperForm= ({steps}:ISteps) => {
           </Button>
         )}
       </div>
+      </form>
+     </FormProvider>
     </>
   );
 };
