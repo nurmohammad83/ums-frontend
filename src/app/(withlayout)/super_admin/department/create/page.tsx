@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 
 import Form from "@/app/components/Forms/Form";
@@ -8,14 +7,13 @@ import { useAddDepartmentMutation } from "@/redux/api/departmentApi";
 import { Button, Col, Row, message } from "antd";
 
 const CreateDepartmentPage = () => {
- 
+  const [addDepartment] = useAddDepartmentMutation();
 
   const onSubmit = async (data: any) => {
-    const [addDepartment]=useAddDepartmentMutation()
     message.loading("Creating.....");
     try {
       console.log(data);
-     addDepartment(data)
+      await addDepartment(data);
       message.success("Department added successfully");
     } catch (err: any) {
       console.error(err.message);
