@@ -19,7 +19,7 @@ const ManageDepartment = () => {
         ]}
       />    
         <ActionBar title="Department list"><Link href='/super_admin/department/create'>
-        <Button type="primary">Create Student</Button>
+        <Button type="primary">Create Department</Button>
         </Link></ActionBar>
     </div>
   );

@@ -7,7 +7,9 @@ import FormTextArea from "@/app/components/Forms/FormTextArea";
 import UMBradCrumb from "@/app/components/ui/UMBredCrumb";
 import UploadImage from "@/app/components/ui/UploadImage";
 import { bloodOptions, departmentOptions, genderOptions } from "@/constants/golbal";
+import { admin } from "@/schemas/admin";
 import { getUserInfo } from "@/services/auth.service";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { Button, Col, Row } from "antd";
 
 const CreateAdminPage = () => {
@@ -36,7 +38,7 @@ const CreateAdminPage = () => {
       />
       <h1 style={{ padding: "5px 0" }}>Create Admin</h1>
 
-      <Form submitHandler={onSubmit}>
+      <Form submitHandler={onSubmit} resolver={yupResolver(admin)}>
         <div
           style={{
             border: "1px solid #d9d9d9",

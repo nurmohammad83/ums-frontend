@@ -12,7 +12,7 @@ const StudentBasicInfo = () => {
             border: "1px solid #d9d9d9",
             borderRadius: "5px",
             padding: "15px",
-            marginBottom: "10px 0",
+            margin: "10px 0",
           }}
         >
           <p style={{ fontSize: "18px", marginBottom: "10px" }}>
@@ -27,7 +27,7 @@ const StudentBasicInfo = () => {
               <FormInput
                 type="email"
                 size="large"
-                name="admin.email"
+                name="student.email"
                 label="Email Address"
               />
             </Col>
@@ -39,7 +39,7 @@ const StudentBasicInfo = () => {
               <FormInput
                 type="Contact No."
                 size="large"
-                name="admin.contactNo"
+                name="student.contactNo"
                 label="Contact Number"
               />
             </Col>
@@ -51,7 +51,7 @@ const StudentBasicInfo = () => {
               <FormInput
                 type="text"
                 size="large"
-                name="admin.emergencyContactNo"
+                name="student.emergencyContactNo"
                 label="Emergency Contact No"
               />
             </Col>
@@ -60,28 +60,28 @@ const StudentBasicInfo = () => {
               className="gutter-row"
               span={12}
             >
-             <FormDatePicker label='Date Of Birth' name="admin.dateOfBirth" size="large" />
+             <FormDatePicker label='Date Of Birth' name="student.dateOfBirth" size="large" />
             </Col>
             <Col
               style={{ marginBottom: "10px" }}
               className="gutter-row"
               span={12}
             >
-              <FormSelectFiled size="large"   name="admin.bloodGroup" options={bloodOptions} placeholder="Select" label="Blood Group"/>
+              <FormSelectFiled size="large"   name="student.bloodGroup" options={bloodOptions} placeholder="Select" label="Blood Group"/>
             </Col>
             <Col
               style={{ marginBottom: "10px" }}
               className="gutter-row"
               span={12}
             >
-            <FormTextArea name="admin.presentAddress" label="Present Address" rows={4} placeholder=""/>
+            <FormTextArea name="student.presentAddress" label="Present Address" rows={4} placeholder=""/>
             </Col>
             <Col
               style={{ marginBottom: "10px" }}
               className="gutter-row"
               span={12}
             >
-            <FormTextArea name="admin.permanentAddress" label="Permanent Address" rows={4} placeholder=""/>
+            <FormTextArea name="student.permanentAddress" label="Permanent Address" rows={4} placeholder=""/>
             </Col>
           </Row>
         </div>

@@ -89,13 +89,6 @@ const StudentInfo = () => {
         className="gutter-row"
         span={8}
       >
-        <FormSelectFiled size="large"   name="student.gender" options={genderOptions} placeholder="Select" label="Academic Semester"/>
-      </Col>
-      <Col
-        style={{ marginBottom: "10px" }}
-        className="gutter-row"
-        span={8}
-      >
         <UploadImage />
       </Col>
     </Row>

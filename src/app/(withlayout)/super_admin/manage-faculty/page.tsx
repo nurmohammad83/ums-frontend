@@ -22,7 +22,7 @@ const ManageFacultyPage = () => {
      
         <ActionBar title="Faculty List">
         <Link href='/super_admin/manage-faculty/create'>
-        <Button type="primary">Create Student</Button>
+        <Button type="primary">Create Faculty</Button>
         </Link>
         </ActionBar>
     </div>

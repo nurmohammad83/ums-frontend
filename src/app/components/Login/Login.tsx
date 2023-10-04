@@ -1,6 +1,6 @@
 'use client'
 
-import { Button, Col, Row } from 'antd';
+import { Button, Col, Row, message } from 'antd';
 import loginImage from '../../../assets/login-image.png'
 import Image from 'next/image';
 import Form from '../Forms/Form';
@@ -24,6 +24,7 @@ const [userLogin] = useUserLoginMutation()
       console.log(res)
       if(res?.accessToken){
         router.push('/profile')
+        message.success("User logged in successfully")
       }
       storeUserInfo({accessToken:res?.accessToken})
     

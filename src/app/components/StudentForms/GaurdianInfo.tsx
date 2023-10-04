@@ -8,7 +8,7 @@ const GuardianInfo = () => {
       border: "1px solid #d9d9d9",
       borderRadius: "5px",
       padding: "15px",
-      marginBottom: "10px 0",
+      margin: "10px 0",
     }}
   >
     <p style={{ fontSize: "18px", marginBottom: "10px" }}>
@@ -23,7 +23,7 @@ const GuardianInfo = () => {
         <FormInput
           type="text"
           size="large"
-          name="admin.fatherName"
+          name="student.guardian.fatherName"
           label="Father Name"
         />
       </Col>
@@ -35,7 +35,7 @@ const GuardianInfo = () => {
         <FormInput
           type="text"
           size="large"
-          name="admin.fatherOccupation"
+          name="student.guardian.fatherOccupation"
           label="Father Occupation"
         />
       </Col>
@@ -47,7 +47,7 @@ const GuardianInfo = () => {
         <FormInput
           type="text"
           size="large"
-          name="admin.fatherContactNo"
+          name="student.guardian.fatherContactNo"
           label="Father Contact No"
         />
       </Col>
@@ -59,7 +59,7 @@ const GuardianInfo = () => {
         <FormInput
           type="text"
           size="large"
-          name="admin.motherName"
+          name="student.guardian.motherName"
           label="Mother Name"
         />
       </Col>
@@ -71,7 +71,7 @@ const GuardianInfo = () => {
         <FormInput
           type="text"
           size="large"
-          name="admin.motherOccupation"
+          name="student.guardian.motherOccupation"
           label="Mother Occupation"
         />
       </Col>
@@ -83,7 +83,7 @@ const GuardianInfo = () => {
         <FormInput
           type="text"
           size="large"
-          name="admin.motherContactNo"
+          name="student.guardian.motherContactNo"
           label="Mother Contact No"
         />
       </Col>
@@ -95,7 +95,7 @@ const GuardianInfo = () => {
         <FormInput
           type="text"
           size="large"
-          name="admin.motherContactNo"
+          name="student.guardian.address"
           label="Address"
         />
       </Col>

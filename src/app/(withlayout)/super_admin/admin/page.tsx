@@ -20,7 +20,7 @@ const ManageAdmin = () => {
       />
         <ActionBar title="Admin List">
         <Link href='/super_admin/admin/create'>
-        <Button type="primary">Create Student</Button>
+        <Button type="primary">Create Admin</Button>
         </Link>
         </ActionBar>
     </div>
