@@ -19,3 +19,11 @@ export interface IGenericErrorMessage {
   path: string | number;
   message: string;
 }
+
+export interface IDepartments {
+  id: string;
+  title: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}

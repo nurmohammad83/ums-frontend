@@ -1,3 +1,4 @@
+import { IDepartments, IMeta } from "@/types";
 import { tagsType } from "../tag-types";
 import { baseApi } from "./baseApi";
 
@@ -13,8 +14,22 @@ const departmentApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [tagsType.user],
     }),
+
+    departments: build.query({
+      query: () => ({
+        url: DEPARTMENT_URL,
+        method: "GET",
+      }),
+      transformResponse: (response: IDepartments, meta: IMeta) => {
+        return {
+          departments: response,
+          meta,
+        };
+      },
+      providesTags: [tagsType.user],
+    }),
   }),
   overrideExisting: false,
 });
 
-export const { useAddDepartmentMutation } = departmentApi;
+export const { useAddDepartmentMutation, useDepartmentsQuery } = departmentApi;
