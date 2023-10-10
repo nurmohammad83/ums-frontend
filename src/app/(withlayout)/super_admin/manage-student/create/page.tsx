@@ -1,11 +1,11 @@
 "use client";
-import StepperForm from "@/app/components/StepperForm/StepperForm";
-import GuardianInfo from "@/app/components/StudentForms/GaurdianInfo";
+import StepperForm from "@/components/StepperForm/StepperForm";
+import GuardianInfo from "@/components/StudentForms/GaurdianInfo";
 
-import LocalGuardianInfo from "@/app/components/StudentForms/LocalGuardianInfo";
-import StudentBasicInfo from "@/app/components/StudentForms/StudentBasicInfo";
-import StudentInfo from "@/app/components/StudentForms/StudentInfo";
-import UMBradCrumb from "@/app/components/ui/UMBredCrumb";
+import LocalGuardianInfo from "@/components/StudentForms/LocalGuardianInfo";
+import StudentBasicInfo from "@/components/StudentForms/StudentBasicInfo";
+import StudentInfo from "@/components/StudentForms/StudentInfo";
+import UMBradCrumb from "@/components/ui/UMBredCrumb";
 import { student } from "@/schemas/studentSchema";
 import { getUserInfo } from "@/services/auth.service";
 import { yupResolver } from "@hookform/resolvers/yup";

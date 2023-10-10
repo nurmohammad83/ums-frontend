@@ -1,6 +1,6 @@
 'use client'
 
-import UMBradCrumb from "@/app/components/ui/UMBredCrumb"
+import UMBradCrumb from "@/components/ui/UMBredCrumb"
 import { getUserInfo } from "@/services/auth.service"
 
 const SuperAdminPage = () => {

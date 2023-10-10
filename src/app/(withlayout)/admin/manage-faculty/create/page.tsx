@@ -8,26 +8,24 @@ import FormTextArea from "@/components/Forms/FormTextArea";
 import UMBradCrumb from "@/components/ui/UMBredCrumb";
 import UploadImage from "@/components/ui/UploadImage";
 import { bloodOptions, genderOptions } from "@/constants/golbal";
+import { useDepartmentsQuery } from "@/redux/api/departmentApi";
 import { facultySchema } from "@/schemas/facultySchema";
+import { IDepartments } from "@/types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button, Col, Row } from "antd";
 
 const CreateFacultyPage = () => {
-  const departmentOptions = [
-    {
-      label: "HR",
-      value: "hr",
-    },
-    {
-      label: "Finance",
-      value: "finance",
-    },
-    {
-      label: "Management",
-      value: "Management",
-    },
-  ];
-
+  const {data,isLoading} = useDepartmentsQuery({limit:100,page:1})
+  //@ts-ignore
+  const departments: IDepartments[] = data?.departments;
+  const departmentOptions =
+  departments &&
+  departments?.map((department) => {
+    return {
+      label: department?.title,
+      value: department?.id,
+    };
+  });
   const adminOnSubmit = async (data: any) => {
     try {
       console.log(data);
@@ -36,7 +34,7 @@ const CreateFacultyPage = () => {
     }
   };
 
-  const base = "super_admin";
+  const base = "admin";
   return (
     <>
       <UMBradCrumb
@@ -45,7 +43,7 @@ const CreateFacultyPage = () => {
           { label: "manage-faculty", link: `/${base}/manage-faculty` },
         ]}
       />
-      <h1>Create Faculty</h1>
+      <h1 style={{padding:"5px 0"}}>Create Faculty</h1>
       <Form submitHandler={adminOnSubmit} resolver={yupResolver(facultySchema)}>
         {/* faculty information */}
         <div

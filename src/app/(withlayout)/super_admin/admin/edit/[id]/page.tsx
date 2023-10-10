@@ -1,70 +1,52 @@
-"use client";
+'use client'
 
-import Form from "@/components/Forms/Form";
-import FormDatePicker from "@/components/Forms/FormDatePicker";
-import FormInput from "@/components/Forms/FormInput";
-import FormSelectFiled from "@/components/Forms/FormSelectField";
-import FormTextArea from "@/components/Forms/FormTextArea";
-import UMBradCrumb from "@/components/ui/UMBredCrumb";
-import UploadImage from "@/components/ui/UploadImage";
-import { bloodOptions, genderOptions } from "@/constants/golbal";
-import { useCreateAdminMutation } from "@/redux/api/adminApi";
-import { useDepartmentsQuery } from "@/redux/api/departmentApi";
-import { admin } from "@/schemas/admin";
-import { yupResolver } from "@hookform/resolvers/yup";
+import Form from "@/components/Forms/Form"
+import FormDatePicker from "@/components/Forms/FormDatePicker"
+import FormInput from "@/components/Forms/FormInput"
+import FormSelectFiled from "@/components/Forms/FormSelectField"
+import FormTextArea from "@/components/Forms/FormTextArea"
+import ActionBar from "@/components/ui/ActionBar"
+import UMBradCrumb from "@/components/ui/UMBredCrumb"
+import UploadImage from "@/components/ui/UploadImage"
+import { bloodOptions, departmentOptions, genderOptions } from "@/constants/golbal"
+import { useAdminQuery, useUpdateAdminMutation } from "@/redux/api/adminApi"
+import { Button, Col, Row, message } from "antd"
 
-import { Button, Col, Row, message } from "antd";
-
-const CreateAdminPage = () => {
-  const { data, isLoading } = useDepartmentsQuery({ limit: 100, page: 1 });
-  const [createAdmin] = useCreateAdminMutation();
-  //@ts-ignore
-  const departments: IDepartment[] = data?.departments;
-
-  const departmentOptions =
-    departments &&
-    departments?.map((department) => {
-      return {
-        label: department?.title,
-        value: department?.id,
-      };
-    });
-
-  const onSubmit = async (values: any) => {
-    const obj = { ...values };
-    const file = obj["file"];
-    delete obj["file"];
-    const data = JSON.stringify(obj);
-    const formData = new FormData();
-    formData.append("file", file as Blob);
-    formData.append("data", data);
-    message.loading("Creating...");
+const EditAdminPage = ({params}:{params:any}) => {
+  const {id} = params
+  const {data} = useAdminQuery(id)
+  const [updateAdmin] = useUpdateAdminMutation()
+  const onSubmit = async (values: { title: string }) => {
+    message.loading("Updating.....");
     try {
-      await createAdmin(formData);
-      message.success("Admin created successfully!");
+      await updateAdmin({id, body:values});
+      message.success("Department Update successfully");
     } catch (err: any) {
-      console.error(err.message);
+      message.error(err.message);
     }
   };
 
+  const defaultValues = {
+    password: data?.title || "",
+  };
   return (
     <div>
-      <UMBradCrumb
-        items={[
-          {
-            label: "super_admin",
-            link: "/super_admin",
-          },
-          {
-            label: "admin",
-            link: "/super_admin/admin",
-          },
-        ]}
-      />
-      <h1>Create Admin</h1>
-
-      <div>
-        <Form submitHandler={onSubmit} resolver={yupResolver(admin)}>
+    {" "}
+    <UMBradCrumb
+      items={[
+        {
+          label: `super_admin`,
+          link: `/super_admin`,
+        },
+        {
+          label: `admin`,
+          link: `/super_admin/admin`,
+        },
+      ]}
+    />
+    <ActionBar title="Update Admin"></ActionBar>
+    <div>
+        <Form submitHandler={onSubmit} defaultValues={defaultValues}>
           <div
             style={{
               border: "1px solid #d9d9d9",
@@ -163,7 +145,7 @@ const CreateAdminPage = () => {
                 <FormSelectFiled
                   size="large"
                   name="admin.managementDepartment"
-                  options={departmentOptions}
+                  options={departmentOptions!}
                   label="Department"
                   placeholder="Select"
                 />
@@ -175,7 +157,7 @@ const CreateAdminPage = () => {
                   marginBottom: "10px",
                 }}
               >
-                <UploadImage name="file" />
+                <UploadImage name="file"/>
               </Col>
             </Row>
           </div>
@@ -299,13 +281,12 @@ const CreateAdminPage = () => {
               </Col>
             </Row>
           </div>
-          <Button htmlType="submit" type="primary">
-            Create
-          </Button>
+          <Button type="primary" htmlType="submit">
+          Add
+        </Button>
         </Form>
       </div>
-    </div>
-  );
-};
-
-export default CreateAdminPage;
+  </div>
+  )
+}
+export default EditAdminPage

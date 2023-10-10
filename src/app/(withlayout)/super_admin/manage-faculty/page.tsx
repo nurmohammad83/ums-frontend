@@ -1,7 +1,7 @@
 'use client'
 
-import ActionBar from "@/app/components/ui/ActionBar";
-import UMBradCrumb from "@/app/components/ui/UMBredCrumb";
+import ActionBar from "@/components/ui/ActionBar";
+import UMBradCrumb from "@/components/ui/UMBredCrumb";
 import { getUserInfo } from "@/services/auth.service";
 import { Button } from "antd";
 import Link from "next/link";

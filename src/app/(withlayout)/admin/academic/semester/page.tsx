@@ -1,31 +1,39 @@
 "use client";
-import { EditOutlined, RedoOutlined,EyeOutlined, DeleteOutlined } from "@ant-design/icons";
-import ActionBar from "@/components/ui/ActionBar";
-import UMBradCrumb from "@/components/ui/UMBredCrumb";
-import UMTable from "@/components/ui/UMTable";
-import { useAdminsQuery, useDeleteAdminMutation } from "@/redux/api/adminApi";
-import { useDebounced } from "@/redux/hooks";
-import { getUserInfo } from "@/services/auth.service";
+import {
+  DeleteOutlined,
+  EditOutlined,
+  ReloadOutlined,
+} from "@ant-design/icons";
+
 import { Button, Input, message } from "antd";
-import dayjs from "dayjs";
 import Link from "next/link";
 import { useState } from "react";
 
+import { useDebounced } from "@/redux/hooks";
+import dayjs from "dayjs";
+import { useAcademicDepartmentsQuery, useDeleteAcademicDepartmentMutation } from "@/redux/api/acadmic/academicDepartment";
+import UMBradCrumb from "@/components/ui/UMBredCrumb";
+import ActionBar from "@/components/ui/ActionBar";
+import UMTable from "@/components/ui/UMTable";
+import { useAcademicSemestersQuery, useDeleteAcademicSemesterMutation } from "@/redux/api/acadmic/academicSemester";
 
-const ManageAdmin = () => {
-  const { role } = getUserInfo() as any;
+
+const ACSemesterPage = () => {
   const query: Record<string, any> = {};
-  const [size, setSize] = useState(5);
-  const [page, setPage] = useState(1);
-  const [sortBy, setSortBy] = useState("");
-  const [sortOrder, setSortOrder] = useState("");
-  const [searchTerm, setSearchTerm] = useState("");
+
+  const [page, setPage] = useState<number>(1);
+  const [size, setSize] = useState<number>(10);
+  const [sortBy, setSortBy] = useState<string>("");
+  const [sortOrder, setSortOrder] = useState<string>("");
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [deleteAcademicSemester] = useDeleteAcademicSemesterMutation();
 
   query["limit"] = size;
   query["page"] = page;
   query["sortBy"] = sortBy;
   query["sortOrder"] = sortOrder;
   // query["searchTerm"] = searchTerm;
+
   const debouncedTerm = useDebounced({
     searchQuery: searchTerm,
     delay: 600,
@@ -34,51 +42,49 @@ const ManageAdmin = () => {
   if (!!debouncedTerm) {
     query["searchTerm"] = debouncedTerm;
   }
+  const { data, isLoading } = useAcademicSemestersQuery({ ...query });
 
-  const [deleteAdmin] = useDeleteAdminMutation();
+  const academicSemesters = data?.academicSemesters;
+  const meta = data?.meta;
 
-  const { data, isLoading } = useAdminsQuery({ ...query });
-  
   const deleteHandler = async (id: string) => {
     message.loading("Deleting.....");
     try {
-      await deleteAdmin(id);
-      message.success("Department Deleted successfully");
+      //   console.log(data);
+      const res = await deleteAcademicSemester(id);
+      if (res) {
+        message.success("Semester Deleted successfully");
+      }
     } catch (err: any) {
+      //   console.error(err.message);
       message.error(err.message);
     }
   };
 
-  const reset = () => {
-    setSortBy("");
-    setSearchTerm("");
-    setSortOrder("");
-  };
-
   const columns = [
     {
-      title: "ID",
-      dataIndex: "id",
+      title: "Title",
+      dataIndex: "title",
     },
     {
-      title: "Name",
-      dataIndex: "name",
+      title: "Code",
+      dataIndex: "code",
+      sorter:true
     },
     {
-      title: "Email",
-      dataIndex: "email",
+      title: "Start Month",
+      dataIndex: "startMonth",
+      sorter:true
     },
     {
-      title: "Department",
-      dataIndex: "department",
+      title: "End Month",
+      dataIndex: "endMonth",
+      sorter:true
     },
     {
-      title: "Designation",
-      dataIndex: "designation",
-    },
-    {
-      title: "Contact No",
-      dataIndex: "contactNo",
+      title: "Year",
+      dataIndex: "year",
+      sorter:true
     },
     {
       title: "CreatedAt",
@@ -93,23 +99,17 @@ const ManageAdmin = () => {
       render: function (data: any) {
         return (
           <>
-          <Button
-                style={{ margin: "0 5px" }}
-                onClick={() => console.log(data)}
-                type="primary"
-              >
-                <EyeOutlined />
-              </Button>
-            <Link href={`/super_admin/admin/edit/${data?.id}`}>
+            <Link href={`/admin/academic/semester/edit/${data?.id}`}>
               <Button
-                style={{ margin: "0 5px" }}
+                style={{
+                  margin: "0px 5px",
+                }}
                 onClick={() => console.log(data)}
                 type="primary"
               >
                 <EditOutlined />
               </Button>
             </Link>
-
             <Button
               onClick={() => deleteHandler(data?.id)}
               type="primary"
@@ -122,58 +122,70 @@ const ManageAdmin = () => {
       },
     },
   ];
+
   const onPaginationChange = (page: number, pageSize: number) => {
+    console.log("Page:", page, "PageSize:", pageSize);
     setPage(page);
     setSize(pageSize);
   };
   const onTableChange = (pagination: any, filter: any, sorter: any) => {
     const { order, field } = sorter;
+    // console.log(order, field);
     setSortBy(field as string);
     setSortOrder(order === "ascend" ? "asc" : "desc");
   };
+
+  const resetFilters = () => {
+    setSortBy("");
+    setSortOrder("");
+    setSearchTerm("");
+  };
+
   return (
     <div>
       <UMBradCrumb
         items={[
           {
-            label: `${role}`,
-            link: `/${role}`,
+            label: "admin",
+            link: "/admin",
           },
         ]}
       />
-      <ActionBar title="Admin List">
+
+      <ActionBar title="Academic Department List">
         <Input
           type="text"
-          placeholder="Search..."
           size="large"
+          placeholder="Search..."
           style={{
-            width: "30%",
+            width: "20%",
           }}
           onChange={(e) => {
             setSearchTerm(e.target.value);
           }}
         />
         <div>
-          <Link href="/super_admin/admin/create">
-            <Button type="primary">Create Admin</Button>
+          <Link href="/admin/academic/semester/create">
+            <Button type="primary">Create</Button>
           </Link>
           {(!!sortBy || !!sortOrder || !!searchTerm) && (
             <Button
-              style={{ margin: "0 5px" }}
-              onClick={() => reset()}
+              onClick={resetFilters}
               type="primary"
+              style={{ margin: "0px 5px" }}
             >
-              <RedoOutlined />
+              <ReloadOutlined />
             </Button>
           )}
         </div>
       </ActionBar>
+
       <UMTable
         loading={isLoading}
         columns={columns}
-        dataSource={data?.admins}
+        dataSource={academicSemesters}
         pageSize={size}
-        totalPages={data?.meta?.total}
+        totalPages={meta?.total}
         showSizeChanger={true}
         onPaginationChange={onPaginationChange}
         onTableChange={onTableChange}
@@ -182,4 +194,5 @@ const ManageAdmin = () => {
     </div>
   );
 };
-export default ManageAdmin;
+
+export default ACSemesterPage;

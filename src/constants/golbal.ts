@@ -31,35 +31,35 @@ export const departmentOptions = [
 export const bloodOptions = [
   {
     label: "A+",
-    value: "a+",
+    value: "A+",
   },
   {
     label: "A-",
-    value: "a-",
+    value: "A-",
   },
   {
     label: "B+",
-    value: "b+",
+    value: "B+",
   },
   {
     label: "B-",
-    value: "b-",
+    value: "B-",
   },
   {
     label: "AB+",
-    value: "ab+",
+    value: "AB+",
   },
   {
     label: "AB-",
-    value: "ab-",
+    value: "AB-",
   },
   {
     label: "O+",
-    value: "o+",
+    value: "O+",
   },
   {
     label: "O-",
-    value: "o-",
+    value: "O-",
   },
 ];
 
@@ -78,21 +78,6 @@ export const facultyOptions = [
   },
 ];
 
-export const acDepartmentOptions = [
-  {
-    label: "CSE",
-    value: "cse",
-  },
-  {
-    label: "Software Engineering",
-    value: "Software Engineering",
-  },
-  {
-    label: "Marketing",
-    value: "marketing",
-  },
-];
-
 export const academicSemesterOptions = [
   {
     label: "Fall 2023",
@@ -107,3 +92,25 @@ export const academicSemesterOptions = [
     value: "summer23",
   },
 ];
+
+export const months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+export const monthsOptions = months.map((month: string) => {
+  return {
+    label: month,
+    value: month,
+  };
+});
